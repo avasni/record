@@ -4,7 +4,7 @@ ID = "Develop-I"
   # This will be your default build command
   base = "/"
   #command = "npm run build"
-  publish = "/"
+  publish = "dist"
 
 # [[redirects]]
 #  from = "/"
