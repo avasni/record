@@ -4,16 +4,16 @@ ID = "Develop-I"
   # This will be your default build command
   base = "/"
   #command = "npm run build"
-  #publish = "dist"
+  publish = "/"
+
+# [[redirects]]
+#  from = "/"
+#  to = "/index.html"
+#  status = 200
+#  force = true
 
 [[redirects]]
-  from = "/"
-  to = "/index.html"
-  status = 200
-  force = true
-
-#[[redirects]]
-# from = "/*"
-# to = "/index.html"
-# status = 200
-# #force = true
+ from = "/*"
+ to = "/index.html"
+ status = 200
+ #force = true
