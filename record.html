@@ -1,0 +1,2526 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Audio+Video+Screen Recording</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <style>
+        html {
+            background: #eee;
+        }
+
+        body {
+            font-family: "Segoe UI", "Open Sans", "Ubuntu", "Calibri", "Corbel", Tahoma, Sans-Serif;
+            font-size: 1.2em;
+            line-height: 1.5em;
+            margin: 0;
+        }
+
+        article, footer {
+            display: block;
+            max-width: 900px;
+            min-width: 360px;
+            width: 80%;
+        }
+
+        article {
+            background: #fff;
+            border: 1px solid;
+            border-color: #ddd #aaa #aaa #ddd;
+            margin: 2.5em auto 0 auto;
+            padding: 2em;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        article p:first-of-type {
+            margin-top: 1.6em;
+        }
+
+        article p:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            margin: 0 auto 2em auto;
+            text-align: center;
+        }
+
+        footer a {
+            color: #666;
+            font-size: inherit;
+            padding: 1em;
+            text-decoration: none;
+            text-shadow: 0 1px 1px #fff;
+        }
+
+        footer a:hover, footer a:focus {
+            color: #111;
+        }
+
+        h1, h2 {
+            border-bottom: 1px solid rgb(189, 189, 189);
+            display: inline;
+            font-weight: normal;
+            line-height: 36px;
+            padding: 0 0 3px 0;
+        }
+
+        a {
+            color: #2844FA;
+            text-decoration: none;
+        }
+
+        a:hover, a:focus {
+            color: #1B29A4;
+        }
+
+        a:active {
+            color: #000;
+        }
+
+        :-moz-any-link:focus {
+            border: 0;
+            color: #000;
+        }
+
+        ::selection {
+            background: #ccc;
+        }
+
+        ::-moz-selection {
+            background: #ccc;
+        }
+
+        button, input[type=button] {
+            -moz-border-radius: 3px;
+            -moz-transition: none;
+            -webkit-transition: none;
+            background: #0370ea;
+            background: -moz-linear-gradient(top, #008dfd 0, #0370ea 100%);
+            background: -webkit-linear-gradient(top, #008dfd 0, #0370ea 100%);
+            border: 1px solid #076bd2;
+            border-radius: 3px;
+            color: #fff;
+            display: inline-block;
+            font-family: inherit;
+            font-size: .8em;
+            line-height: 1.3;
+            padding: 5px 12px;
+            text-align: center;
+            text-shadow: 1px 1px 1px #076bd2;
+            font-size: 1.5em;
+        }
+
+        button:hover, input[type=button]:hover {
+            background: rgb(9, 147, 240);
+        }
+
+        button:active, input[type=button]:active {
+            background: rgb(10, 118, 190);
+        }
+
+        button[disabled], input[type=button][disabled] {
+            background: none;
+            border: 1px solid rgb(187, 181, 181);
+            color: gray;
+            text-shadow: none;
+        }
+
+        strong {
+            color: rgb(204, 14, 14);
+            font-family: inherit;
+            font-weight: normal;
+        }
+
+        tr, td, th {
+            vertical-align: top;
+            padding: .7em 1.4em;
+            border-top: 1px dotted #BBA9A9;
+            border-right: 1px dotted #BBA9A9;
+        }
+
+        table, tbody, tr, td {
+            width: 100%!important;
+        }
+
+        .table-style {
+            border-collapse: collapse;
+            border-spacing: 0px;
+            margin-top: 0px;
+            margin-bottom: 16px;
+            display: block;
+            width: 728px;
+            overflow: auto;
+            word-break: normal;
+            color: rgb(51, 51, 51);
+            font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+            font-size: 16px;
+            line-height: 25.6000003814697px;
+            "><thead><tr style="border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgb(204, 204, 204);
+        }
+        .tr-style {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgb(204, 204, 204);
+            background-color: rgb(248, 248, 248);
+        }
+        .td-style {
+            padding: 6px 13px;
+            border: 1px solid rgb(221, 221, 221);
+        }
+        .td-style2 {
+            color: rgb(65, 131, 196);
+            text-decoration: none;
+            background: transparent;
+        }
+
+        .logo img {
+            border-radius: 50%;
+            box-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 5px black;
+        }
+
+        .experiment {
+            border: 1px solid rgb(189, 189, 189);
+            margin: 1em 3em;
+            border-radius: .2em;
+            text-align: left;
+        }
+
+        .experiment .header {
+            padding: .2em .4em;
+        }
+
+        .experiment .description {
+            padding: .8em 1.4em;
+        }
+
+        ol {
+            margin-left: 1em;
+        }
+
+        pre {
+            border-left: 2px solid red;
+            margin-left: 2em;
+            padding-left: 1em;
+            overflow: auto;
+        }
+
+        .commit {
+            font-size: .8em;
+            margin: 1em .6em;
+            padding: 8px 8px 0;
+            background: #e6f1f6;
+            border: 1px solid #c5d5dd;
+            border-radius: 4px;
+        }
+
+        .commit-desc {
+            display: block;
+            margin: -5px 0 10px 0;
+        }
+
+        .commit-desc img {
+            max-width: 100%;
+        }
+
+        .commit-meta {
+            margin-left: -8px;
+            width: 100%;
+            padding: 8px;
+            background: #fff;
+            border-top: 1px solid #d8e6ec;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .authorship {
+            margin-top: -2px;
+            margin-left: -4px;
+            margin-bottom: -4px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .gravatar {
+            margin-top: -2px;
+            margin-right: 3px;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+
+        .author-name {
+            color: #444;
+        }
+
+        .commit-url {
+            float: right;
+            margin-left: 15px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .dim {
+            color: rgb(223, 223, 223);
+        }
+
+        .roshan {
+            color: red;
+        }
+
+        .github-stargazers {
+            font: bold 11px/14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            margin-left: 28%;
+        }
+
+        .github-btn {
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .gh-btn,
+        .gh-count,
+        .gh-ico {
+            float: left;
+            margin-left: 5px;
+        }
+
+        .gh-btn,
+        .gh-count {
+            padding: 2px 5px 2px 4px;
+            color: #555;
+            text-decoration: none;
+            text-shadow: 0 1px 0 #fff;
+            white-space: nowrap;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .gh-btn {
+            background-color: #e6e6e6;
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#eaeaea));
+            background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+            background-image: -moz-linear-gradient(top, #fafafa, #eaeaea);
+            background-image: -ms-linear-gradient(#fafafa, #eaeaea);
+            background-image: -o-linear-gradient(#fafafa, #eaeaea);
+            background-image: linear-gradient(#fafafa, #eaeaea);
+            background-repeat: no-repeat;
+            border: 1px solid #d4d4d4;
+            border-bottom-color: #bcbcbc;
+        }
+
+        .gh-btn:hover,
+        .gh-btn:focus,
+        .gh-btn:active {
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+            border-color: #518cc6 #518cc6 #2a65a0;
+            background-color: #3072b3;
+        }
+
+        .gh-btn:hover,
+        .gh-btn:focus {
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
+            background-image: -webkit-linear-gradient(#599bdc, #3072b3);
+            background-image: -moz-linear-gradient(top, #599bdc, #3072b3);
+            background-image: -ms-linear-gradient(#599bdc, #3072b3);
+            background-image: -o-linear-gradient(#599bdc, #3072b3);
+            background-image: linear-gradient(#599bdc, #3072b3);
+        }
+
+        .gh-btn:active {
+            background-image: none;
+            -webkit-box-shadow: inset 0 2px 5px rgba(0,0,0,.10);
+            -moz-box-shadow: inset 0 2px 5px rgba(0,0,0,.10);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,.10);
+        }
+
+        .gh-ico {
+            width: 14px;
+            height: 15px;
+            margin-top: -1px;
+            margin-right: 4px;
+            vertical-align: middle;
+            background-image: url(data:image/png;base64,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);
+            background-repeat: no-repeat;
+            background-position: 0 0;
+        }
+
+        .gh-btn:hover .gh-ico,
+        .gh-btn:focus .gh-ico,
+        .gh-btn:active .gh-ico {
+            background-position: -25px 0;
+        }
+
+        .gh-count {
+            position: relative;
+            margin-left: 0px;
+            background-color: #fafafa;
+            border: 1px solid #d4d4d4;
+        }
+
+        .gh-count:hover,
+        .gh-count:focus {
+            color: #4183C4;
+        }
+
+        .gh-count:before,
+        .gh-count:after {
+            content: ' ';
+            position: absolute;
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+        }
+
+        .gh-count:before {
+            top: 50%;
+            left: -3px;
+            margin-top: -4px;
+            border-width: 4px 4px 4px 0;
+            border-right-color: #fafafa;
+        }
+
+        .gh-count:after {
+            top: 50%;
+            left: -4px;
+            z-index: -1;
+            margin-top: -5px;
+            border-width: 5px 5px 5px 0;
+            border-right-color: #d4d4d4;
+        }
+
+        .github-btn-large {
+            height: 30px;
+        }
+
+        .github-btn-large .gh-btn,
+        .github-btn-large .gh-count {
+            padding: 3px 10px 3px 8px;
+            font-size: 16px;
+            line-height: 22px;
+            border-radius: 4px;
+        }
+
+        .github-btn-large .gh-ico {
+            width: 22px;
+            height: 23px;
+            background-position: 0 -20px;
+        }
+
+        .github-btn-large .gh-btn:hover .gh-ico,
+        .github-btn-large .gh-btn:focus .gh-ico,
+        .github-btn-large .gh-btn:active .gh-ico {
+            background-position: -25px -20px;
+        }
+
+        .github-btn-large .gh-count {
+            margin-left: 6px;
+        }
+
+        .github-btn-large .gh-count:before {
+            left: -5px;
+            margin-top: -6px;
+            border-width: 6px 6px 6px 0;
+        }
+
+        .github-btn-large .gh-count:after {
+            left: -6px;
+            margin-top: -7px;
+            border-width: 7px 7px 7px 0;
+        }
+
+        @media (-moz-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 2/1), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+            .gh-ico {
+                background-image: url(data:image/png;base64,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);
+                background-size: 50px 45px;
+            };
+        }
+
+        .plusone-gplus {
+            position: absolute;
+            top: 8%;
+        }
+
+        @media all and (max-width: 800px) {
+            body {
+                font-size: 1.1em;
+            }
+
+            article {
+                margin: 1.5em auto 0 auto;
+                padding: 1.5em;
+            }
+
+            .experiment {
+                margin: 1em .2em;
+            }
+        }
+
+        @media all and (max-width: 500px) {
+            body {
+                font-size: .9em;
+            }
+
+            article {
+                margin: .5em auto 0 auto;
+                padding: .5em;
+            }
+
+            .experiment {
+                margin: 1em .1em;
+            }
+        }
+
+        @media all and (max-width: 300px) {
+            body {
+                font-size: .8em;
+            }
+
+            article {
+                margin: 0 auto 0 auto;
+                padding: 0;
+            }
+
+            .experiment {
+                margin: 1em 0;
+            }
+        }
+
+        li pre {
+            margin: 0;
+        }
+
+        li h2 {
+            color: red;
+        }
+
+        li li h2 {
+            font-size: 1em;
+            color: rgb(6, 101, 243);
+        }
+
+        .fork-left, .fork-right {
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 140px;
+            height: 140px;
+        }
+
+        .fork-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url('https://cdn.webrtc-experiment.com/images/fork-left.png');
+        }
+
+        .fork-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: url('https://cdn.webrtc-experiment.com/images/fork-right.png');
+        }
+
+        select {
+            border: 1px solid #d9d9d9;
+            border-radius: 1px;
+            height: 50px;
+            margin-left: 1em;
+            margin-right: -5px;
+            padding: 1.1em;
+            vertical-align: 6px;
+        }
+
+        p {
+            padding: 0 .8em;
+            padding-bottom: .4em;
+        }
+
+        li {
+            border-bottom: 1px solid rgb(189, 189, 189);
+            border-left: 1px solid rgb(189, 189, 189);
+            padding: .5em;
+        }
+
+        code {
+            font-size: 1.2em;
+        }
+
+        .commit pre {
+            border: 1px dotted black;
+            margin: 1em;
+            font-size: 1.2em;
+        }
+
+        blockquote {
+            background: rgb(241, 241, 241);
+            padding: 1em;
+            border: 1px dotted gray;
+            margin: 0 1em;
+        }
+
+        .answer {
+            border-left: 1px dotted gray;
+            margin-left: 5em;
+            padding: 0 1em;
+        }
+
+        pre a {
+            text-decoration: underline;
+        }
+
+        blockquote.inline {
+            margin: 1em;
+            border-radius: 3px;
+            box-shadow: 2px 2px rgb(182, 170, 170);
+        }
+        li {
+            border-bottom: 1px solid rgb(189, 189, 189);
+            border-left: 1px solid rgb(189, 189, 189);
+            padding: .5em;
+        }
+        label {
+            display: inline-block;
+            width: 8em;
+        }
+
+        h1 span {
+            background: yellow;
+            border: 2px solid #8e1515;
+            padding: 2px 8px;
+            margin: 2px 5px;
+            border-radius: 7px;
+            color: #8e1515;
+            display: inline-block;
+        }
+
+        .recordrtc button {
+            font-size: inherit;
+        }
+
+        .recordrtc button, .recordrtc select {
+            vertical-align: middle;
+            line-height: 1;
+            padding: 2px 5px;
+            height: auto;
+            font-size: inherit;
+            margin: 0;
+        }
+
+        .recordrtc, .recordrtc .header {
+            display: block;
+            text-align: center;
+            padding-top: 0;
+        }
+
+        .recordrtc video, .recordrtc img {
+            max-width: 100%!important;
+            vertical-align: top;
+        }
+
+        .recordrtc audio {
+            vertical-align: bottom;
+        }
+
+        .recordrtc option[disabled] {
+            display: none;
+        }
+
+        .recordrtc select {
+            font-size: 17px;
+        }
+    </style>
+
+    <script src="./cb=gapi.loaded_1" async=""></script>
+    <script src="./cb=gapi(1).loaded_0" async=""></script>
+    <script src="./RecordRTC.js"></script>
+    <!-- web streams API polyfill to support Firefox -->
+    <script src="./polyfill.min.js"></script>
+
+    <!-- ../libs/DBML.js to fix video seeking issues -->
+    <script src="./EBML.js"></script>
+
+    <!-- for Edge/FF/Chrome/Opera/etc. getUserMedia support -->
+    <script src="./adapter-latest.js"></script>
+    <script src="./DetectRTC.js"> </script>
+
+    <!-- video element -->
+    <link href="./getHTMLMediaElement.css" rel="stylesheet">
+    <script src="./getHTMLMediaElement.js"></script>
+    <script type="text/javascript" async="" src="./embed.js"></script>
+    <link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.5c5dad4ae74bbb3422efd01116dc45e6.css">
+    <link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.e150012b6029bf98df48f021965c6081.js">
+    <link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.ca5fccd41098c8c41f4ca679c8abad9a.js">
+    <link rel="prefetch" as="script" href="https://disqus.com/next/config.js">
+</head>
+
+<body>
+    <article>
+        <header style="text-align: center;">
+            <h1>
+                Audio+Video+Screen Recording
+            </h1>
+        </header>
+        <section class="experiment recordrtc">
+            <h2 class="header" style="margin: 0;">
+                <select class="recording-media">
+                    <option value="record-audio-plus-screen">Microphone+Screen</option>
+                    <option value="record-audio-plus-video">Microphone+Camera</option>
+                    <option value="record-audio">Microphone</option>
+                    <option value="record-screen">Full Screen</option>
+                </select>
+
+                <span style="font-size: 15px;">into</span>
+
+                <select class="media-container-format">
+                    <option>default</option>
+                    <option>vp8</option>
+                    <option>vp9</option>
+                    <option>h264</option>
+                    <option>mkv</option>
+                    <option disabled="">opus</option>
+                    <option disabled="">ogg</option>
+                    <option disabled="">pcm</option>
+                    <option>gif</option>
+                    <option>whammy</option>
+                    <option>WebAssembly</option>
+                </select>
+
+                <input type="checkbox" id="chk-timeSlice" style="margin:0;width:auto;" title="Use intervals based recording">
+                <label for="chk-timeSlice" style="font-size: 15px;margin:0;width: auto;cursor: pointer;-webkit-user-select:none;user-select:none;" title="Use intervals based recording">Use timeSlice?</label>
+
+                <br>
+
+                <button id="btn-start-recording">Start Recording</button>
+                <button id="btn-pause-recording" style="display: none; font-size: 15px;">Pause</button>
+
+                <div style="display: inline-block;">
+                    <input type="checkbox" id="chk-fixSeeking" style="margin:0;width:auto;" title="Fix video seeking issues?">
+                    <label for="chk-fixSeeking" style="font-size: 15px;margin:0;width: auto;cursor: pointer;-webkit-user-select:none;user-select:none;" title="Fix video seeking issues?">Fix Seeking Issues?</label>
+                </div>
+
+                <hr style="border-top: 0;border-bottom: 1px solid rgb(189, 189, 189);margin: 4px -12px;margin-top: 8px;">
+                <select class="media-resolutions">
+                    <option value="default">Default resolutions</option>
+                    <option value="1920x1080">1080p</option>
+                    <option value="1280x720">720p</option>
+                    <option value="640x480">480p</option>
+                    <option value="3840x2160">4K Ultra HD (3840x2160)</option>
+                </select>
+
+                <select class="media-framerates">
+                    <option value="default">Default framerates</option>
+                    <option value="5">5 fps</option>
+                    <option value="15">15 fps</option>
+                    <option value="24">24 fps</option>
+                    <option value="30">30 fps</option>
+                    <option value="60">60 fps</option>
+                </select>
+
+                <select class="media-bitrates">
+                    <option value="default">Default bitrates</option>
+                    <option value="8000000000">1 GB bps</option>
+                    <option value="800000000">100 MB bps</option>
+                    <option value="8000000">1 MB bps</option>
+                    <option value="800000">100 KB bps</option>
+                    <option value="8000">1 KB bps</option>
+                    <option value="800">100 Bytes bps</option>
+                </select>
+            </h2>
+
+            <div style="text-align: center; display: none;">
+                <button id="save-to-disk">Save To Disk</button>
+                <!-- <button id="upload-to-php">Upload to PHP</button>
+                <button id="open-new-tab">Open New Tab</button>
+                <div style="margin-top: 10px;">
+                    <span id="signinButton" class="pre-sign-in">
+                      <div id="___signin_0" style="position: absolute; width: 450px; left: -10000px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none" tabindex="0" vspace="0" width="100%" id="I0_1592548967028" name="I0_1592548967028" src="./record_files/signin.html" data-gapiattached="true"></iframe></div><span class="g-signin" data-callback="signinCallback" data-clientid="41556190767-115ifahd55lk4ln5pop4jus55cr4l7oh.apps.googleusercontent.com" data-cookiepolicy="single_host_origin" data-scope="https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube" data-gapiscan="true" data-onload="true" data-gapistub="true">
+                      </span>
+                    </span>
+                    <button id="upload-to-youtube" style="vertical-align:top;">Upload to YouTube</button>
+                </div> -->
+            </div>
+
+            <div style="margin-top: 10px;" id="recording-player">
+                <div class="media-container" style="width: 360px;display: none;">
+                    <div class="media-controls" style="margin-left: 323px; opacity: 1;">
+                        <div class="control zoom-in"></div>
+                    </div>
+                    <div class="volume-control" style="margin-left: 358px; margin-top: 180px; opacity: 1;"></div>
+                    <div class="media-box" style="display: none;">
+                        <h2
+                            style="position: absolute;color:white;font-size:17px;text-shadow: 1px 1px black;padding:0;margin:0;text-align: left; margin-top: 10px; margin-left: 10px; display: block; border: 0;line-height:1.5;z-index:1;">
+                            Recording status: inactive</h2>
+                        <section><video autoplay="" style="max-height: 382px;"></video></section>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            (function() {
+                var params = {},
+                    r = /([^&=]+)=?([^&]*)/g;
+
+                function d(s) {
+                    return decodeURIComponent(s.replace(/\+/g, ' '));
+                }
+
+                var match, search = window.location.search;
+                while (match = r.exec(search.substring(1))) {
+                    params[d(match[1])] = d(match[2]);
+
+                    if(d(match[2]) === 'true' || d(match[2]) === 'false') {
+                        params[d(match[1])] = d(match[2]) === 'true' ? true : false;
+                    }
+                }
+
+                window.params = params;
+            })();
+
+            function addStreamStopListener(stream, callback) {
+                stream.addEventListener('ended', function() {
+                    callback();
+                    callback = function() {};
+                }, false);
+                stream.addEventListener('inactive', function() {
+                    callback();
+                    callback = function() {};
+                }, false);
+                stream.getTracks().forEach(function(track) {
+                    track.addEventListener('ended', function() {
+                        callback();
+                        callback = function() {};
+                    }, false);
+                    track.addEventListener('inactive', function() {
+                        callback();
+                        callback = function() {};
+                    }, false);
+                });
+            }
+        </script>
+
+        <script>
+            var video = document.createElement('video');
+            video.controls = false;
+            var mediaElement = getHTMLMediaElement(video, {
+                title: 'Recording status: inactive',
+                buttons: ['full-screen'/*, 'take-snapshot'*/],
+                showOnMouseEnter: false,
+                width: 360,
+                onTakeSnapshot: function() {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = mediaElement.clientWidth;
+                    canvas.height = mediaElement.clientHeight;
+
+                    var context = canvas.getContext('2d');
+                    context.drawImage(recordingPlayer, 0, 0, canvas.width, canvas.height);
+
+                    window.open(canvas.toDataURL('image/png'));
+                }
+            });
+            document.getElementById('recording-player').appendChild(mediaElement);
+
+            var div = document.createElement('section');
+            mediaElement.media.parentNode.appendChild(div);
+            mediaElement.media.muted = false;
+            mediaElement.media.autoplay = true;
+            mediaElement.media.playsinline = true;
+            div.appendChild(mediaElement.media);
+            
+            var recordingPlayer = mediaElement.media;
+            var recordingMedia = document.querySelector('.recording-media');
+            var mediaContainerFormat = document.querySelector('.media-container-format');
+            var mimeType = 'video/webm';
+            var fileExtension = 'webm';
+            var type = 'video';
+            var recorderType;
+            var defaultWidth;
+            var defaultHeight;
+
+            var btnStartRecording = document.querySelector('#btn-start-recording');
+
+            window.onbeforeunload = function() {
+                btnStartRecording.disabled = false;
+                recordingMedia.disabled = false;
+                mediaContainerFormat.disabled = false;
+
+                chkFixSeeking.parentNode.style.display = 'inline-block';
+            };
+
+            btnStartRecording.onclick = function(event) {
+                var button = btnStartRecording;
+
+                if(button.innerHTML === 'Stop Recording') {
+                    btnPauseRecording.style.display = 'none';
+                    button.disabled = true;
+                    button.disableStateWaiting = true;
+                    setTimeout(function() {
+                        button.disabled = false;
+                        button.disableStateWaiting = false;
+                    }, 2000);
+
+                    button.innerHTML = 'Start Recording';
+
+                    function stopStream() {
+                        if(button.stream && button.stream.stop) {
+                            button.stream.stop();
+                            button.stream = null;
+                        }
+
+                        if(button.stream instanceof Array) {
+                            button.stream.forEach(function(stream) {
+                                stream.stop();
+                            });
+                            button.stream = null;
+                        }
+
+                        videoBitsPerSecond = null;
+                        var html = 'Recording status: stopped';
+                        html += '<br>Size: ' + bytesToSize(button.recordRTC.getBlob().size);
+                        recordingPlayer.parentNode.parentNode.querySelector('h2').innerHTML = html;
+                    }
+
+                    if(button.recordRTC) {
+                        if(button.recordRTC.length) {
+                            button.recordRTC[0].stopRecording(function(url) {
+                                if(!button.recordRTC[1]) {
+                                    button.recordingEndedCallback(url);
+                                    stopStream();
+
+                                    saveToDiskOrOpenNewTab(button.recordRTC[0]);
+                                    return;
+                                }
+
+                                button.recordRTC[1].stopRecording(function(url) {
+                                    button.recordingEndedCallback(url);
+                                    stopStream();
+                                });
+                            });
+                        }
+                        else {
+                            button.recordRTC.stopRecording(function(url) {
+                                if(button.blobs && button.blobs.length) {
+                                    var blob = new File(button.blobs, getFileName(fileExtension), {
+                                        type: mimeType
+                                    });
+                                    
+                                    button.recordRTC.getBlob = function() {
+                                        return blob;
+                                    };
+
+                                    url = URL.createObjectURL(blob);
+                                }
+
+                                if(chkFixSeeking.checked === true) {
+                                    // to fix video seeking issues
+                                    getSeekableBlob(button.recordRTC.getBlob(), function(seekableBlob) {
+                                        button.recordRTC.getBlob = function() {
+                                            return seekableBlob;
+                                        };
+
+                                        url = URL.createObjectURL(seekableBlob);
+
+                                        button.recordingEndedCallback(url);
+                                        saveToDiskOrOpenNewTab(button.recordRTC);
+                                        stopStream();
+                                    })
+                                    return;
+                                }
+
+                                button.recordingEndedCallback(url);
+                                saveToDiskOrOpenNewTab(button.recordRTC);
+                                stopStream();
+                            });
+                        }
+                    }
+
+                    return;
+                }
+
+                if(!event) return;
+
+                button.disabled = true;
+
+                var commonConfig = {
+                    onMediaCaptured: function(stream) {
+                        button.stream = stream;
+                        if(button.mediaCapturedCallback) {
+                            button.mediaCapturedCallback();
+                        }
+
+                        button.innerHTML = 'Stop Recording';
+                        button.disabled = false;
+
+                        chkFixSeeking.parentNode.style.display = 'none';
+                    },
+                    onMediaStopped: function() {
+                        button.innerHTML = 'Start Recording';
+
+                        if(!button.disableStateWaiting) {
+                            button.disabled = false;
+                        }
+
+                        chkFixSeeking.parentNode.style.display = 'inline-block';
+                    },
+                    onMediaCapturingFailed: function(error) {
+                        console.error('onMediaCapturingFailed:', error);
+
+                        if(error.toString().indexOf('no audio or video tracks available') !== -1) {
+                            alert('RecordRTC failed to start because there are no audio or video tracks available.');
+                        }
+                        
+                        if(error.name === 'PermissionDeniedError' && DetectRTC.browser.name === 'Firefox') {
+                            alert('Firefox requires version >= 52. Firefox also requires HTTPs.');
+                        }
+
+                        commonConfig.onMediaStopped();
+                    }
+                };
+
+                if(mediaContainerFormat.value === 'h264') {
+                    mimeType = 'video/webm\;codecs=h264';
+                    fileExtension = 'mp4';
+
+                    // video/mp4;codecs=avc1    
+                    if(isMimeTypeSupported('video/mpeg')) {
+                        mimeType = 'video/mpeg';
+                    }
+                }
+
+                if(mediaContainerFormat.value === 'mkv' && isMimeTypeSupported('video/x-matroska;codecs=avc1')) {
+                    mimeType = 'video/x-matroska;codecs=avc1';
+                    fileExtension = 'mkv';
+                }
+
+                if(mediaContainerFormat.value === 'vp8' && isMimeTypeSupported('video/webm\;codecs=vp8')) {
+                    mimeType = 'video/webm\;codecs=vp8';
+                    fileExtension = 'webm';
+                    recorderType = null;
+                    type = 'video';
+                }
+
+                if(mediaContainerFormat.value === 'vp9' && isMimeTypeSupported('video/webm\;codecs=vp9')) {
+                    mimeType = 'video/webm\;codecs=vp9';
+                    fileExtension = 'webm';
+                    recorderType = null;
+                    type = 'video';
+                }
+
+                if(mediaContainerFormat.value === 'pcm') {
+                    mimeType = 'audio/wav';
+                    fileExtension = 'wav';
+                    recorderType = StereoAudioRecorder;
+                    type = 'audio';
+                }
+
+                if(mediaContainerFormat.value === 'opus' || mediaContainerFormat.value === 'ogg') {
+                    if(isMimeTypeSupported('audio/webm')) {
+                        mimeType = 'audio/webm';
+                        fileExtension = 'webm'; // webm
+                    }
+
+                    if(isMimeTypeSupported('audio/ogg')) {
+                        mimeType = 'audio/ogg; codecs=opus';
+                        fileExtension = 'ogg'; // ogg
+                    }
+
+                    recorderType = null;
+                    type = 'audio';
+                }
+
+                if(mediaContainerFormat.value === 'whammy') {
+                    mimeType = 'video/webm';
+                    fileExtension = 'webm';
+                    recorderType = WhammyRecorder;
+                    type = 'video';
+                }
+
+                if(mediaContainerFormat.value === 'WebAssembly') {
+                    mimeType = 'video/webm';
+                    fileExtension = 'webm';
+                    recorderType = WebAssemblyRecorder;
+                    type = 'video';
+                }
+
+                if(mediaContainerFormat.value === 'gif') {
+                    mimeType = 'image/gif';
+                    fileExtension = 'gif';
+                    recorderType = GifRecorder;
+                    type = 'gif';
+                }
+
+                if(mediaContainerFormat.value === 'default') {
+                    mimeType = 'video/webm';
+                    fileExtension = 'webm';
+                    recorderType = null;
+                    type = 'video';
+                }
+
+                if(recordingMedia.value === 'record-audio') {
+                    captureAudio(commonConfig);
+
+                    button.mediaCapturedCallback = function() {
+                        var options = {
+                            type: type,
+                            mimeType: mimeType,
+                            leftChannel: params.leftChannel || false,
+                            disableLogs: params.disableLogs || false
+                        };
+
+                        if(params.sampleRate) {
+                            options.sampleRate = parseInt(params.sampleRate);
+                        }
+
+                        if(params.bufferSize) {
+                            options.bufferSize = parseInt(params.bufferSize);
+                        }
+
+                        if(recorderType) {
+                            options.recorderType = recorderType;
+                        }
+
+                        if(videoBitsPerSecond) {
+                            options.videoBitsPerSecond = videoBitsPerSecond;
+                        }
+
+                        if(DetectRTC.browser.name === 'Edge') {
+                            options.numberOfAudioChannels = 1;
+                        }
+
+                        options.ignoreMutedMedia = false;
+                        button.recordRTC = RecordRTC(button.stream, options);
+
+                        button.recordingEndedCallback = function(url) {
+                            setVideoURL(url);
+                        };
+
+                        button.recordRTC.startRecording();
+                        btnPauseRecording.style.display = '';
+                    };
+                }
+
+                if(recordingMedia.value === 'record-audio-plus-video') {
+                    captureAudioPlusVideo(commonConfig);
+
+                    button.mediaCapturedCallback = function() {
+                        if(typeof MediaRecorder === 'undefined') { // opera or chrome etc.
+                            button.recordRTC = [];
+
+                            if(!params.bufferSize) {
+                                // it fixes audio issues whilst recording 720p
+                                params.bufferSize = 16384;
+                            }
+
+                            var options = {
+                                type: 'audio', // hard-code to set "audio"
+                                leftChannel: params.leftChannel || false,
+                                disableLogs: params.disableLogs || false,
+                                video: recordingPlayer
+                            };
+
+                            if(params.sampleRate) {
+                                options.sampleRate = parseInt(params.sampleRate);
+                            }
+
+                            if(params.bufferSize) {
+                                options.bufferSize = parseInt(params.bufferSize);
+                            }
+
+                            if(params.frameInterval) {
+                                options.frameInterval = parseInt(params.frameInterval);
+                            }
+
+                            if(recorderType) {
+                                options.recorderType = recorderType;
+                            }
+
+                            if(videoBitsPerSecond) {
+                                options.videoBitsPerSecond = videoBitsPerSecond;
+                            }
+
+                            options.ignoreMutedMedia = false;
+                            var audioRecorder = RecordRTC(button.stream, options);
+
+                            options.type = type;
+                            var videoRecorder = RecordRTC(button.stream, options);
+
+                            // to sync audio/video playbacks in browser!
+                            videoRecorder.initRecorder(function() {
+                                audioRecorder.initRecorder(function() {
+                                    audioRecorder.startRecording();
+                                    videoRecorder.startRecording();
+                                    btnPauseRecording.style.display = '';
+                                });
+                            });
+
+                            button.recordRTC.push(audioRecorder, videoRecorder);
+
+                            button.recordingEndedCallback = function() {
+                                var audio = new Audio();
+                                audio.src = audioRecorder.toURL();
+                                audio.controls = true;
+                                audio.autoplay = true;
+
+                                recordingPlayer.parentNode.appendChild(document.createElement('hr'));
+                                recordingPlayer.parentNode.appendChild(audio);
+
+                                if(audio.paused) audio.play();
+                            };
+                            return;
+                        }
+
+                        var options = {
+                            type: type,
+                            mimeType: mimeType,
+                            disableLogs: params.disableLogs || false,
+                            getNativeBlob: false, // enable it for longer recordings
+                            video: recordingPlayer
+                        };
+
+                        if(recorderType) {
+                            options.recorderType = recorderType;
+
+                            if(recorderType == WhammyRecorder || recorderType == GifRecorder || recorderType == WebAssemblyRecorder) {
+                                options.canvas = options.video = {
+                                    width: defaultWidth || 320,
+                                    height: defaultHeight || 240
+                                };
+                            }
+                        }
+
+                        if(videoBitsPerSecond) {
+                            options.videoBitsPerSecond = videoBitsPerSecond;
+                        }
+
+                        if(timeSlice && typeof MediaRecorder !== 'undefined') {
+                            options.timeSlice = timeSlice;
+                            button.blobs = [];
+                            options.ondataavailable = function(blob) {
+                                button.blobs.push(blob);
+                            };
+                        }
+
+                        options.ignoreMutedMedia = false;
+                        button.recordRTC = RecordRTC(button.stream, options);
+
+                        button.recordingEndedCallback = function(url) {
+                            setVideoURL(url);
+                        };
+
+                        button.recordRTC.startRecording();
+                        btnPauseRecording.style.display = '';
+                        recordingPlayer.parentNode.parentNode.querySelector('h2').innerHTML = '<img src="https://www.webrtc-experiment.com/images/progress.gif">';
+                    };
+                }
+
+                if(recordingMedia.value === 'record-screen') {
+                    captureScreen(commonConfig);
+
+                    button.mediaCapturedCallback = function() {
+                        var options = {
+                            type: type,
+                            mimeType: mimeType,
+                            disableLogs: params.disableLogs || false,
+                            getNativeBlob: false, // enable it for longer recordings
+                            video: recordingPlayer
+                        };
+
+                        if(recorderType) {
+                            options.recorderType = recorderType;
+
+                            if(recorderType == WhammyRecorder || recorderType == GifRecorder || recorderType == WebAssemblyRecorder) {
+                                options.canvas = options.video = {
+                                    width: defaultWidth || 320,
+                                    height: defaultHeight || 240
+                                };
+                            }
+                        }
+
+                        if(videoBitsPerSecond) {
+                            options.videoBitsPerSecond = videoBitsPerSecond;
+                        }
+
+                        options.ignoreMutedMedia = false;
+                        button.recordRTC = RecordRTC(button.stream, options);
+
+                        button.recordingEndedCallback = function(url) {
+                            setVideoURL(url);
+                        };
+
+                        button.recordRTC.startRecording();
+                        btnPauseRecording.style.display = '';
+                    };
+                }
+
+                // note: audio+tab is supported in Chrome 50+
+                // todo: add audio+tab recording
+                if(recordingMedia.value === 'record-audio-plus-screen') {
+                    captureAudioPlusScreen(commonConfig);
+
+                    button.mediaCapturedCallback = function() {
+                        var options = {
+                            type: type,
+                            mimeType: mimeType,
+                            disableLogs: params.disableLogs || false,
+                            getNativeBlob: false, // enable it for longer recordings
+                            video: recordingPlayer
+                        };
+
+                        if(recorderType) {
+                            options.recorderType = recorderType;
+
+                            if(recorderType == WhammyRecorder || recorderType == GifRecorder || recorderType == WebAssemblyRecorder) {
+                                options.canvas = options.video = {
+                                    width: defaultWidth || 320,
+                                    height: defaultHeight || 240
+                                };
+                            }
+                        }
+
+                        if(videoBitsPerSecond) {
+                            options.videoBitsPerSecond = videoBitsPerSecond;
+                        }
+
+                        options.ignoreMutedMedia = false;
+                        button.recordRTC = RecordRTC(button.stream, options);
+
+                        button.recordingEndedCallback = function(url) {
+                            setVideoURL(url);
+                        };
+
+                        button.recordRTC.startRecording();
+                        btnPauseRecording.style.display = '';
+                    };
+                }
+            };
+
+            function captureVideo(config) {
+                captureUserMedia({video: true}, function(videoStream) {
+                    config.onMediaCaptured(videoStream);
+
+                    addStreamStopListener(videoStream, function() {
+                        config.onMediaStopped();
+                    });
+                }, function(error) {
+                    config.onMediaCapturingFailed(error);
+                });
+            }
+
+            function captureAudio(config) {
+                captureUserMedia({audio: true}, function(audioStream) {
+                    config.onMediaCaptured(audioStream);
+
+                    addStreamStopListener(audioStream, function() {
+                        config.onMediaStopped();
+                    });
+                }, function(error) {
+                    config.onMediaCapturingFailed(error);
+                });
+            }
+
+            function captureAudioPlusVideo(config) {
+                captureUserMedia({video: true, audio: true}, function(audioVideoStream) {
+                    config.onMediaCaptured(audioVideoStream);
+
+                    if(audioVideoStream instanceof Array) {
+                        audioVideoStream.forEach(function(stream) {
+                            addStreamStopListener(stream, function() {
+                                config.onMediaStopped();
+                            });
+                        });
+                        return;
+                    }
+
+                    addStreamStopListener(audioVideoStream, function() {
+                        config.onMediaStopped();
+                    });
+                }, function(error) {
+                    config.onMediaCapturingFailed(error);
+                });
+            }
+
+            var MY_DOMAIN = 'webrtc-experiment.com';
+
+            function isMyOwnDomain() {
+                // replace "webrtc-experiment.com" with your own domain name
+                return document.domain.indexOf(MY_DOMAIN) !== -1;
+            }
+
+            function isLocalHost() {
+                // "chrome.exe" --enable-usermedia-screen-capturing
+                // or firefox => about:config => "media.getusermedia.screensharing.allowed_domains" => add "localhost"
+                return document.domain === 'localhost' || document.domain === '127.0.0.1';
+            }
+
+            var videoBitsPerSecond;
+
+            function setVideoBitrates() {
+                var select = document.querySelector('.media-bitrates');
+                var value = select.value;
+
+                if(value == 'default') {
+                    videoBitsPerSecond = null;
+                    return;
+                }
+
+                videoBitsPerSecond = parseInt(value);
+            }
+
+            function getFrameRates(mediaConstraints) {
+                if(!mediaConstraints.video) {
+                    return mediaConstraints;
+                }
+
+                var select = document.querySelector('.media-framerates');
+                var value = select.value;
+
+                if(value == 'default') {
+                    return mediaConstraints;
+                }
+
+                value = parseInt(value);
+
+                if(DetectRTC.browser.name === 'Firefox') {
+                    mediaConstraints.video.frameRate = value;
+                    return mediaConstraints;
+                }
+
+                if(!mediaConstraints.video.mandatory) {
+                    mediaConstraints.video.mandatory = {};
+                    mediaConstraints.video.optional = [];
+                }
+
+                var isScreen = recordingMedia.value.toString().toLowerCase().indexOf('screen') != -1;
+                if(isScreen) {
+                    mediaConstraints.video.mandatory.maxFrameRate = value;
+                }
+                else {
+                    mediaConstraints.video.mandatory.minFrameRate = value;
+                }
+
+                return mediaConstraints;
+            }
+
+            function setGetFromLocalStorage(selectors) {
+                selectors.forEach(function(selector) {
+                    var storageItem = selector.replace(/\.|#/g, '');
+                    if(localStorage.getItem(storageItem)) {
+                        document.querySelector(selector).value = localStorage.getItem(storageItem);
+                    }
+
+                    addEventListenerToUploadLocalStorageItem(selector, ['change', 'blur'], function() {
+                        localStorage.setItem(storageItem, document.querySelector(selector).value);
+                    });
+                });
+            }
+
+            function addEventListenerToUploadLocalStorageItem(selector, arr, callback) {
+                arr.forEach(function(event) {
+                    document.querySelector(selector).addEventListener(event, callback, false);
+                });
+            }
+
+            setGetFromLocalStorage(['.media-resolutions', '.media-framerates', '.media-bitrates', '.recording-media', '.media-container-format']);
+
+            function getVideoResolutions(mediaConstraints) {
+                if(!mediaConstraints.video) {
+                    return mediaConstraints;
+                }
+
+                var select = document.querySelector('.media-resolutions');
+                var value = select.value;
+
+                if(value == 'default') {
+                    return mediaConstraints;
+                }
+
+                value = value.split('x');
+
+                if(value.length != 2) {
+                    return mediaConstraints;
+                }
+
+                defaultWidth = parseInt(value[0]);
+                defaultHeight = parseInt(value[1]);
+
+                if(DetectRTC.browser.name === 'Firefox') {
+                    mediaConstraints.video.width = defaultWidth;
+                    mediaConstraints.video.height = defaultHeight;
+                    return mediaConstraints;
+                }
+
+                if(!mediaConstraints.video.mandatory) {
+                    mediaConstraints.video.mandatory = {};
+                    mediaConstraints.video.optional = [];
+                }
+
+                var isScreen = recordingMedia.value.toString().toLowerCase().indexOf('screen') != -1;
+
+                if(isScreen) {
+                    mediaConstraints.video.mandatory.maxWidth = defaultWidth;
+                    mediaConstraints.video.mandatory.maxHeight = defaultHeight;
+                }
+                else {
+                    mediaConstraints.video.mandatory.minWidth = defaultWidth;
+                    mediaConstraints.video.mandatory.minHeight = defaultHeight;
+                }
+
+                return mediaConstraints;
+            }
+
+            function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
+                if(mediaConstraints.video == true) {
+                    mediaConstraints.video = {};
+                }
+
+                setVideoBitrates();
+
+                mediaConstraints = getVideoResolutions(mediaConstraints);
+                mediaConstraints = getFrameRates(mediaConstraints);
+
+                var isBlackBerry = !!(/BB10|BlackBerry/i.test(navigator.userAgent || ''));
+                if(isBlackBerry && !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia)) {
+                    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                    navigator.getUserMedia(mediaConstraints, successCallback, errorCallback);
+                    return;
+                }
+
+                navigator.mediaDevices.getUserMedia(mediaConstraints).then(function(stream) {
+                    successCallback(stream);
+
+                    setVideoURL(stream, true);
+                }).catch(function(error) {
+                    if(error && (error.name === 'ConstraintNotSatisfiedError' || error.name === 'OverconstrainedError')) {
+                        alert('Your camera or browser does NOT supports selected resolutions or frame-rates. \n\nPlease select "default" resolutions.');
+                    }
+                    else if(error && error.message) {
+                        alert(error.message);
+                    }
+                    else {
+                        alert('Unable to make getUserMedia request. Please check browser console logs.');
+                    }
+
+                    errorCallback(error);
+                });
+            }
+
+            function setMediaContainerFormat(arrayOfOptionsSupported) {
+                var options = Array.prototype.slice.call(
+                    mediaContainerFormat.querySelectorAll('option')
+                );
+
+                var localStorageItem;
+                if(localStorage.getItem('media-container-format')) {
+                    localStorageItem = localStorage.getItem('media-container-format');
+                }
+
+                var selectedItem;
+                options.forEach(function(option) {
+                    option.disabled = true;
+
+                    if(arrayOfOptionsSupported.indexOf(option.value) !== -1) {
+                        option.disabled = false;
+
+                        if(localStorageItem && arrayOfOptionsSupported.indexOf(localStorageItem) != -1) {
+                            if(option.value != localStorageItem) return;
+                            option.selected = true;
+                            selectedItem = option;
+                            return;
+                        }
+
+                        if(!selectedItem) {
+                            option.selected = true;
+                            selectedItem = option;
+                        }
+                    }
+                });
+            }
+
+            function isMimeTypeSupported(mimeType) {
+                if(typeof MediaRecorder === 'undefined') {
+                    return false;
+                }
+
+                if(typeof MediaRecorder.isTypeSupported !== 'function') {
+                    return true;
+                }
+
+                return MediaRecorder.isTypeSupported(mimeType);
+            }
+
+            recordingMedia.onchange = function() {
+                if(recordingMedia.value === 'record-audio') {
+                    var recordingOptions = [];
+                    
+                    if(isMimeTypeSupported('audio/webm')) {
+                        recordingOptions.push('opus');
+                    }
+
+                    if(isMimeTypeSupported('audio/ogg')) {
+                        recordingOptions.push('ogg');
+                    }
+
+                    recordingOptions.push('pcm');
+
+                    setMediaContainerFormat(recordingOptions);
+                    return;
+                }
+
+                var isChrome = !!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+
+                var recordingOptions = ['vp8']; // MediaStreamRecorder with vp8
+
+                if(isMimeTypeSupported('video/webm\;codecs=vp9')) {
+                    recordingOptions.push('vp9'); // MediaStreamRecorder with vp9
+                }
+
+                if(isMimeTypeSupported('video/webm\;codecs=h264')) {
+                    recordingOptions.push('h264'); // MediaStreamRecorder with h264
+                }
+
+                if(isMimeTypeSupported('video/x-matroska;codecs=avc1')) {
+                    recordingOptions.push('mkv'); // MediaStreamRecorder with mkv/matroska
+                }
+
+                recordingOptions.push('gif'); // GifRecorder
+
+                if(DetectRTC.browser.name == 'Chrome') {
+                    recordingOptions.push('whammy'); // WhammyRecorder
+                }
+
+                if(DetectRTC.browser.name == 'Chrome') {
+                    recordingOptions.push('WebAssembly'); // WebAssemblyRecorder
+                }
+
+                recordingOptions.push('default'); // Default mimeType for MediaStreamRecorder
+
+                setMediaContainerFormat(recordingOptions);
+            };
+            recordingMedia.onchange();
+
+            if(typeof MediaRecorder === 'undefined' && (DetectRTC.browser.name === 'Edge' || DetectRTC.browser.name === 'Safari')) {
+                // webp isn't supported in Microsoft Edge
+                // neither MediaRecorder API
+                // so lets disable both video/screen recording options
+
+                console.warn('Neither MediaRecorder API nor webp is supported in ' + DetectRTC.browser.name + '. You cam merely record audio.');
+
+                recordingMedia.innerHTML = '<option value="record-audio">Audio</option>';
+                setMediaContainerFormat(['pcm']);
+            }
+
+            function stringify(obj) {
+                var result = '';
+                Object.keys(obj).forEach(function(key) {
+                    if(typeof obj[key] === 'function') {
+                        return;
+                    }
+
+                    if(result.length) {
+                        result += ',';
+                    }
+
+                    result += key + ': ' + obj[key];
+                });
+
+                return result;
+            }
+
+            function mediaRecorderToStringify(mediaRecorder) {
+                var result = '';
+                result += 'mimeType: ' + mediaRecorder.mimeType;
+                result += ', state: ' + mediaRecorder.state;
+                result += ', audioBitsPerSecond: ' + mediaRecorder.audioBitsPerSecond;
+                result += ', videoBitsPerSecond: ' + mediaRecorder.videoBitsPerSecond;
+                if(mediaRecorder.stream) {
+                    result += ', streamid: ' + mediaRecorder.stream.id;
+                    result += ', stream-active: ' + mediaRecorder.stream.active;
+                }
+                return result;
+            }
+
+            function getFailureReport() {
+                var info = 'RecordRTC seems failed. \n\n' + stringify(DetectRTC.browser) + '\n\n' + DetectRTC.osName + ' ' + DetectRTC.osVersion + '\n';
+
+                if (typeof recorderType !== 'undefined' && recorderType) {
+                    info += '\nrecorderType: ' + recorderType.name;
+                }
+
+                if (typeof mimeType !== 'undefined') {
+                    info += '\nmimeType: ' + mimeType;
+                }
+
+                Array.prototype.slice.call(document.querySelectorAll('select')).forEach(function(select) {
+                    info += '\n' + (select.id || select.className) + ': ' + select.value;
+                });
+
+                if (btnStartRecording.recordRTC) {
+                    info += '\n\ninternal-recorder: ' + btnStartRecording.recordRTC.getInternalRecorder().name;
+                    
+                    if(btnStartRecording.recordRTC.getInternalRecorder().getAllStates) {
+                        info += '\n\nrecorder-states: ' + btnStartRecording.recordRTC.getInternalRecorder().getAllStates();
+                    }
+                }
+
+                if(btnStartRecording.stream) {
+                    info += '\n\naudio-tracks: ' + getTracks(btnStartRecording.stream, 'audio').length;
+                    info += '\nvideo-tracks: ' + getTracks(btnStartRecording.stream, 'video').length;
+                    info += '\nstream-active? ' + !!btnStartRecording.stream.active;
+
+                    btnStartRecording.stream.getTracks().forEach(function(track) {
+                        info += '\n' + track.kind + '-track-' + (track.label || track.id) + ': (enabled: ' + !!track.enabled + ', readyState: ' + track.readyState + ', muted: ' + !!track.muted + ')';
+
+                        if(track.getConstraints && Object.keys(track.getConstraints()).length) {
+                            info += '\n' + track.kind + '-track-getConstraints: ' + stringify(track.getConstraints());
+                        }
+
+                        if(track.getSettings && Object.keys(track.getSettings()).length) {
+                            info += '\n' + track.kind + '-track-getSettings: ' + stringify(track.getSettings());
+                        }
+                    });
+                }
+
+                if(timeSlice && btnStartRecording.recordRTC) {
+                    info += '\ntimeSlice: ' + timeSlice;
+
+                    if(btnStartRecording.recordRTC.getInternalRecorder().getArrayOfBlobs) {
+                        var blobSizes = [];
+                        btnStartRecording.recordRTC.getInternalRecorder().getArrayOfBlobs().forEach(function(blob) {
+                            blobSizes.push(blob.size);
+                        });
+                        info += '\nblobSizes: ' + blobSizes;
+                    }
+                }
+
+                else if(btnStartRecording.recordRTC && btnStartRecording.recordRTC.getBlob()) {
+                    info += '\n\nblobSize: ' + bytesToSize(btnStartRecording.recordRTC.getBlob().size);
+                }
+
+                if(btnStartRecording.recordRTC && btnStartRecording.recordRTC.getInternalRecorder() && btnStartRecording.recordRTC.getInternalRecorder().getInternalRecorder && btnStartRecording.recordRTC.getInternalRecorder().getInternalRecorder()) {
+                    info += '\n\ngetInternalRecorder: ' + mediaRecorderToStringify(btnStartRecording.recordRTC.getInternalRecorder().getInternalRecorder());
+                }
+
+                return info;
+            }
+
+            function saveToDiskOrOpenNewTab(recordRTC) {
+                if(!recordRTC.getBlob().size) {
+                    var info = getFailureReport();
+                    console.log('blob', recordRTC.getBlob());
+                    console.log('recordrtc instance', recordRTC);
+                    console.log('report', info);
+
+                    if(mediaContainerFormat.value !== 'default') {
+                        alert('RecordRTC seems failed recording using ' + mediaContainerFormat.value + '. Please choose "default" option from the drop down and record again.');
+                    }
+                    else {
+                        alert('RecordRTC seems failed. Unexpected issue. You can read the email in your console log. \n\nPlease report using disqus chat below.');
+                    }
+
+                    if(mediaContainerFormat.value !== 'vp9' && DetectRTC.browser.name === 'Chrome') {
+                        alert('Please record using VP9 encoder. (select from the dropdown)');
+                    }
+                }
+
+                var fileName = getFileName(fileExtension);
+
+                document.querySelector('#save-to-disk').parentNode.style.display = 'block';
+                document.querySelector('#save-to-disk').onclick = function() {
+                    if(!recordRTC) return alert('No recording found.');
+
+                    var file = new File([recordRTC.getBlob()], fileName, {
+                        type: mimeType
+                    });
+
+                    invokeSaveAsDialog(file, file.name);
+                };
+
+                document.querySelector('#open-new-tab').onclick = function() {
+                    if(!recordRTC) return alert('No recording found.');
+
+                    var file = new File([recordRTC.getBlob()], fileName, {
+                        type: mimeType
+                    });
+
+                    window.open(URL.createObjectURL(file));
+                };
+
+                // upload to PHP server
+                if(isMyOwnDomain()) {
+                    document.querySelector('#upload-to-php').disabled = true;
+                    document.querySelector('#upload-to-php').style.display = 'none';
+                }
+                else {
+                    document.querySelector('#upload-to-php').disabled = false;
+                }
+                
+                document.querySelector('#upload-to-php').onclick = function() {
+                    if(isMyOwnDomain()) {
+                        alert('PHP Upload is not available on this domain.');
+                        return;
+                    }
+
+                    if(!recordRTC) return alert('No recording found.');
+                    this.disabled = true;
+
+                    var button = this;
+                    uploadToPHPServer(fileName, recordRTC, function(progress, fileURL) {
+                        if(progress === 'ended') {
+                            button.disabled = false;
+                            button.innerHTML = 'Click to download from server';
+                            button.onclick = function() {
+                                SaveFileURLToDisk(fileURL, fileName);
+                            };
+
+                            setVideoURL(fileURL);
+
+                            var html = 'Uploaded to PHP.<br>Download using below link:<br>';
+                            html += '<a href="'+fileURL+'" download="'+fileName+'" style="color: yellow; display: block; margin-top: 15px;">'+fileName+'</a>';
+                            recordingPlayer.parentNode.parentNode.querySelector('h2').innerHTML = html;
+                            return;
+                        }
+                        button.innerHTML = progress;
+                        recordingPlayer.parentNode.parentNode.querySelector('h2').innerHTML = progress;
+                    });
+                };
+
+                // upload to YouTube!
+                document.querySelector('#upload-to-youtube').disabled = false;
+                document.querySelector('#upload-to-youtube').onclick = function() {
+                    if(!recordRTC) return alert('No recording found.');
+                    this.disabled = true;
+
+                    if(isLocalHost()) {
+                        alert('This feature is NOT available on localhost.');
+                        return;
+                    }
+
+                    if(isMyOwnDomain() === false) {
+                        var url = 'https://github.com/muaz-khan/RecordRTC/wiki/Upload-to-YouTube';
+                        alert('YouTube API key is configured to work only on webrtc-experiment.com. Please create your own YouTube key + oAuth client-id and use it instead.\n\nWiki page: ' + url);
+
+                        // check instructions on the wiki page
+                        location.href = url;
+                        return;
+                    }
+
+                    var button = this;
+                    uploadToYouTube(fileName, recordRTC, function(percentageComplete, fileURL) {
+                        if(percentageComplete == 'uploaded') {
+                            button.disabled = false;
+                            button.innerHTML = 'Uploaded. However YouTube is still processing.';
+                            button.onclick = function() {
+                                window.open(fileURL);
+                            };
+                            return;
+                        }
+                        if(percentageComplete == 'processed') {
+                            button.disabled = false;
+                            button.innerHTML = 'Uploaded & Processed. Click to open YouTube video.';
+                            button.onclick = function() {
+                                window.open(fileURL);
+                            };
+
+                            document.querySelector('h1').innerHTML = 'Your video has been uploaded.';
+                            window.scrollTo(0, 0);
+
+                            alert('Your video has been uploaded.');
+                            return;
+                        }
+                        if(percentageComplete == 'failed') {
+                            button.disabled = false;
+                            button.innerHTML = 'YouTube failed transcoding the video.';
+                            button.onclick = function() {
+                                window.open(fileURL);
+                            };
+                            return;
+                        }
+                        button.innerHTML = percentageComplete + '% uploaded to YouTube.';
+                    });
+                };
+            }
+
+            function uploadToPHPServer(fileName, recordRTC, callback) {
+                var blob = recordRTC instanceof Blob ? recordRTC : recordRTC.getBlob();
+                
+                blob = new File([blob], getFileName(fileExtension), {
+                    type: mimeType
+                });
+
+                // create FormData
+                var formData = new FormData();
+                formData.append('video-filename', fileName);
+                formData.append('video-blob', blob);
+
+                callback('Uploading recorded-file to server.');
+
+                // var upload_url = 'https://your-domain.com/files-uploader/';
+                var upload_url = 'RecordRTC-to-PHP/save.php';
+
+                // var upload_directory = upload_url;
+                var upload_directory = 'RecordRTC-to-PHP/uploads/';
+
+                makeXMLHttpRequest(upload_url, formData, function(progress) {
+                    if (progress !== 'upload-ended') {
+                        callback(progress);
+                        return;
+                    }
+
+                    callback('ended', upload_directory + fileName);
+                });
+            }
+
+            function makeXMLHttpRequest(url, data, callback) {
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == 200) {
+                        if(request.responseText === 'success') {
+                            callback('upload-ended');
+                            return;
+                        }
+
+                        document.querySelector('.header').parentNode.style = 'text-align: left; color: red; padding: 5px 10px;';
+                        document.querySelector('.header').parentNode.innerHTML = request.responseText;
+                    }
+                };
+
+                request.upload.onloadstart = function() {
+                    callback('Upload started...');
+                };
+
+                request.upload.onprogress = function(event) {
+                    callback('Upload Progress ' + Math.round(event.loaded / event.total * 100) + "%");
+                };
+
+                request.upload.onload = function() {
+                    callback('progress-about-to-end');
+                };
+
+                request.upload.onload = function() {
+                    callback('Getting File URL..');
+                };
+
+                request.upload.onerror = function(error) {
+                    callback('Failed to upload to server');
+                };
+
+                request.upload.onabort = function(error) {
+                    callback('Upload aborted.');
+                };
+
+                request.open('POST', url);
+                request.send(data);
+            }
+
+            function getRandomString() {
+                if (window.crypto && window.crypto.getRandomValues && navigator.userAgent.indexOf('Safari') === -1) {
+                    var a = window.crypto.getRandomValues(new Uint32Array(3)),
+                        token = '';
+                    for (var i = 0, l = a.length; i < l; i++) {
+                        token += a[i].toString(36);
+                    }
+                    return token;
+                } else {
+                    return (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
+                }
+            }
+
+            function getFileName(fileExtension) {
+                var d = new Date();
+                var year = d.getUTCFullYear();
+                var month = d.getUTCMonth();
+                var date = d.getUTCDate();
+                return 'RecordRTC-' + year + month + date + '-' + getRandomString() + '.' + fileExtension;
+            }
+
+            function SaveFileURLToDisk(fileUrl, fileName) {
+                var hyperlink = document.createElement('a');
+                hyperlink.href = fileUrl;
+                hyperlink.target = '_blank';
+                hyperlink.download = fileName || fileUrl;
+
+                (document.body || document.documentElement).appendChild(hyperlink);
+                hyperlink.onclick = function() {
+                   (document.body || document.documentElement).removeChild(hyperlink);
+
+                   // required for Firefox
+                   window.URL.revokeObjectURL(hyperlink.href);
+                };
+
+                var mouseEvent = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true
+                });
+
+                hyperlink.dispatchEvent(mouseEvent);
+            }
+
+            function getURL(arg) {
+                var url = arg;
+
+                if(arg instanceof Blob || arg instanceof File) {
+                    url = URL.createObjectURL(arg);
+                }
+
+                if(arg instanceof RecordRTC || arg.getBlob) {
+                    url = URL.createObjectURL(arg.getBlob());
+                }
+
+                if(arg instanceof MediaStream || arg.getTracks) {
+                    // url = URL.createObjectURL(arg);
+                }
+
+                return url;
+            }
+
+            function setVideoURL(arg, forceNonImage) {
+                var url = getURL(arg);
+
+                var parentNode = recordingPlayer.parentNode;
+                parentNode.removeChild(recordingPlayer);
+                parentNode.innerHTML = '';
+
+                var elem = 'video';
+                if(type == 'gif' && !forceNonImage) {
+                    elem = 'img';
+                }
+                if(type == 'audio') {
+                    elem = 'audio';
+                }
+
+                recordingPlayer = document.createElement(elem);
+                
+                if(arg instanceof MediaStream) {
+                    recordingPlayer.muted = true;
+                }
+
+                recordingPlayer.addEventListener('loadedmetadata', function() {
+                    if(navigator.userAgent.toLowerCase().indexOf('android') == -1) return;
+
+                    // android
+                    setTimeout(function() {
+                        if(typeof recordingPlayer.play === 'function') {
+                            recordingPlayer.play();
+                        }
+                    }, 2000);
+                }, false);
+
+                recordingPlayer.poster = '';
+
+                if(arg instanceof MediaStream) {
+                    recordingPlayer.srcObject = arg;
+                }
+                else {
+                    recordingPlayer.src = url;
+                }
+
+                if(typeof recordingPlayer.play === 'function') {
+                    recordingPlayer.play();
+                }
+
+                recordingPlayer.addEventListener('ended', function() {
+                    url = getURL(arg);
+                    
+                    if(arg instanceof MediaStream) {
+                        recordingPlayer.srcObject = arg;
+                    }
+                    else {
+                        recordingPlayer.src = url;
+                    }
+                });
+
+                parentNode.appendChild(recordingPlayer);
+            }
+        </script>
+
+        <script>
+            function captureScreen(config) {
+                if (navigator.getDisplayMedia) {
+                    navigator.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        config.onMediaCaptured(screenStream);
+
+                        addStreamStopListener(screenStream, function() {
+                            // config.onMediaStopped();
+
+                            btnStartRecording.onclick();
+                        });
+
+                        setVideoURL(screenStream, true);
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else if (navigator.mediaDevices.getDisplayMedia) {
+                    navigator.mediaDevices.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        config.onMediaCaptured(screenStream);
+
+                        addStreamStopListener(screenStream, function() {
+                            // config.onMediaStopped();
+
+                            btnStartRecording.onclick();
+                        });
+
+                        setVideoURL(screenStream, true);
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else {
+                    var error = 'getDisplayMedia API are not supported in this browser.';
+                    config.onMediaCapturingFailed(error);
+                    alert(error);
+                }
+            }
+
+            function captureAudioPlusScreen(config) {
+                if (navigator.getDisplayMedia) {
+                    navigator.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        navigator.mediaDevices.getUserMedia({audio:true}).then(function(mic) {
+                            screenStream.addTrack(mic.getTracks()[0]);
+
+                            config.onMediaCaptured(screenStream);
+
+                            addStreamStopListener(screenStream, function() {
+                                // config.onMediaStopped();
+
+                                btnStartRecording.onclick();
+                            });
+
+                            setVideoURL(screenStream, true);
+                        });
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else if (navigator.mediaDevices.getDisplayMedia) {
+                    navigator.mediaDevices.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        navigator.mediaDevices.getUserMedia({audio:true}).then(function(mic) {
+                            screenStream.addTrack(mic.getTracks()[0]);
+
+                            config.onMediaCaptured(screenStream);
+
+                            addStreamStopListener(screenStream, function() {
+                                // config.onMediaStopped();
+
+                                btnStartRecording.onclick();
+                            });
+
+                            setVideoURL(screenStream, true);
+                        });
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else {
+                    var error = 'getDisplayMedia API are not supported in this browser.';
+                    config.onMediaCapturingFailed(error);
+                    alert(error);
+                }
+            }
+        </script>
+
+        <script>
+            /* upload_youtube_video.js Copyright 2017 Google Inc. All Rights Reserved. */
+
+            function uploadToYouTube(fileName, recordRTC, callback) {
+                var blob = recordRTC instanceof Blob ? recordRTC : recordRTC.getBlob();
+                
+                blob = new File([blob], getFileName(fileExtension), {
+                    type: mimeType
+                });
+
+                if(!uploadVideo) {
+                    alert('YouTube API are not available.');
+                    return;
+                }
+
+                uploadVideo.callback = callback;
+                uploadVideo.uploadFile(fileName, blob);
+            }
+
+            var uploadVideo;
+
+            var signinCallback = function (result){
+              if(result.access_token) {
+                uploadVideo = new UploadVideo();
+                uploadVideo.ready(result.access_token);
+
+                document.querySelector('#signinButton').style.display = 'none';
+              }
+              else {
+                // console.error('YouTube error', result);
+                // document.querySelector('#upload-to-youtube').style.display = 'none';
+              }
+            };
+
+            var STATUS_POLLING_INTERVAL_MILLIS = 60 * 1000; // One minute.
+
+            var UploadVideo = function() {
+              this.tags = ['recordrtc'];
+              this.categoryId = 28; // via: http://stackoverflow.com/a/35877512/552182
+              this.videoId = '';
+              this.uploadStartTime = 0;
+            };
+
+
+            UploadVideo.prototype.ready = function(accessToken) {
+              this.accessToken = accessToken;
+              this.gapi = gapi;
+              this.authenticated = true;
+              false && this.gapi.client.request({
+                path: '/youtube/v3/channels',
+                params: {
+                  part: 'snippet',
+                  mine: true
+                },
+                callback: function(response) {
+                  if (!response.error) {
+                    // response.items[0].snippet.title -- channel title
+                    // response.items[0].snippet.thumbnails.default.url -- channel thumbnail
+                  }
+                }.bind(this)
+              });
+            };
+
+            UploadVideo.prototype.uploadFile = function(fileName, file) {
+              var metadata = {
+                snippet: {
+                  title: fileName,
+                  description: fileName,
+                  tags: this.tags,
+                  categoryId: this.categoryId
+                },
+                status: {
+                  privacyStatus: 'public'
+                }
+              };
+              var uploader = new MediaUploader({
+                baseUrl: 'https://www.googleapis.com/upload/youtube/v3/videos',
+                file: file,
+                token: this.accessToken,
+                metadata: metadata,
+                params: {
+                  part: Object.keys(metadata).join(',')
+                },
+                onError: function(data) {
+                  var message = data;
+                  try {
+                    var errorResponse = JSON.parse(data);
+                    message = errorResponse.error.message;
+                  } finally {
+                    alert(message);
+                  }
+                }.bind(this),
+                onProgress: function(data) {
+                  var bytesUploaded = data.loaded;
+                  var totalBytes = parseInt(data.total);
+                  var percentageComplete = parseInt((bytesUploaded * 100) / totalBytes);
+
+                  uploadVideo.callback(percentageComplete);
+                }.bind(this),
+                onComplete: function(data) {
+                  var uploadResponse = JSON.parse(data);
+                  this.videoId = uploadResponse.id;
+                  this.videoURL = 'https://www.youtube.com/watch?v=' + this.videoId;
+                  uploadVideo.callback('uploaded', this.videoURL);
+
+                  setTimeout(this.pollForVideoStatus, 2000);
+                }.bind(this)
+              });
+              this.uploadStartTime = Date.now();
+              uploader.upload();
+            };
+
+            UploadVideo.prototype.pollForVideoStatus = function() {
+              this.gapi.client.request({
+                path: '/youtube/v3/videos',
+                params: {
+                  part: 'status,player',
+                  id: this.videoId
+                },
+                callback: function(response) {
+                  if (response.error) {
+                    uploadVideo.pollForVideoStatus();
+                  } else {
+                    var uploadStatus = response.items[0].status.uploadStatus;
+                    switch (uploadStatus) {
+                      case 'uploaded':
+                        uploadVideo.callback('uploaded', uploadVideo.videoURL);
+                        uploadVideo.pollForVideoStatus();
+                        break;
+                        case 'processed':
+                        uploadVideo.callback('processed', uploadVideo.videoURL);
+                        break;
+                        default:
+                        uploadVideo.callback('failed', uploadVideo.videoURL);
+                        break;
+                    }
+                  }
+                }.bind(this)
+              });
+            };
+
+        </script>
+
+        <script>
+            /* cors_upload.js Copyright 2015 Google Inc. All Rights Reserved. */
+
+            var DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files/';
+
+            var RetryHandler = function() {
+              this.interval = 1000; // Start at one second
+              this.maxInterval = 60 * 1000; // Don't wait longer than a minute 
+            };
+
+            RetryHandler.prototype.retry = function(fn) {
+              setTimeout(fn, this.interval);
+              this.interval = this.nextInterval_();
+            };
+
+            RetryHandler.prototype.reset = function() {
+              this.interval = 1000;
+            };
+
+            RetryHandler.prototype.nextInterval_ = function() {
+              var interval = this.interval * 2 + this.getRandomInt_(0, 1000);
+              return Math.min(interval, this.maxInterval);
+            };
+
+            RetryHandler.prototype.getRandomInt_ = function(min, max) {
+              return Math.floor(Math.random() * (max - min + 1) + min);
+            };
+
+            var MediaUploader = function(options) {
+              var noop = function() {};
+              this.file = options.file;
+              this.contentType = options.contentType || this.file.type || 'application/octet-stream';
+              this.metadata = options.metadata || {
+                'title': this.file.name,
+                'mimeType': this.contentType
+              };
+              this.token = options.token;
+              this.onComplete = options.onComplete || noop;
+              this.onProgress = options.onProgress || noop;
+              this.onError = options.onError || noop;
+              this.offset = options.offset || 0;
+              this.chunkSize = options.chunkSize || 0;
+              this.retryHandler = new RetryHandler();
+
+              this.url = options.url;
+              if (!this.url) {
+                var params = options.params || {};
+                params.uploadType = 'resumable';
+                this.url = this.buildUrl_(options.fileId, params, options.baseUrl);
+              }
+              this.httpMethod = options.fileId ? 'PUT' : 'POST';
+            };
+
+            MediaUploader.prototype.upload = function() {
+              var self = this;
+              var xhr = new XMLHttpRequest();
+
+              xhr.open(this.httpMethod, this.url, true);
+              xhr.setRequestHeader('Authorization', 'Bearer ' + this.token);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.setRequestHeader('X-Upload-Content-Length', this.file.size);
+              xhr.setRequestHeader('X-Upload-Content-Type', this.contentType);
+
+              xhr.onload = function(e) {
+                if (e.target.status < 400) {
+                  var location = e.target.getResponseHeader('Location');
+                  this.url = location;
+                  this.sendFile_();
+                } else {
+                  this.onUploadError_(e);
+                }
+              }.bind(this);
+              xhr.onerror = this.onUploadError_.bind(this);
+              xhr.send(JSON.stringify(this.metadata));
+            };
+
+            MediaUploader.prototype.sendFile_ = function() {
+              var content = this.file;
+              var end = this.file.size;
+
+              if (this.offset || this.chunkSize) {
+                // Only bother to slice the file if we're either resuming or uploading in chunks
+                if (this.chunkSize) {
+                  end = Math.min(this.offset + this.chunkSize, this.file.size);
+                }
+                content = content.slice(this.offset, end);
+              }
+
+              var xhr = new XMLHttpRequest();
+              xhr.open('PUT', this.url, true);
+              xhr.setRequestHeader('Content-Type', this.contentType);
+              xhr.setRequestHeader('Content-Range', 'bytes ' + this.offset + '-' + (end - 1) + '/' + this.file.size);
+              xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
+              if (xhr.upload) {
+                xhr.upload.addEventListener('progress', this.onProgress);
+              }
+              xhr.onload = this.onContentUploadSuccess_.bind(this);
+              xhr.onerror = this.onContentUploadError_.bind(this);
+              xhr.send(content);
+            };
+
+            MediaUploader.prototype.resume_ = function() {
+              var xhr = new XMLHttpRequest();
+              xhr.open('PUT', this.url, true);
+              xhr.setRequestHeader('Content-Range', 'bytes */' + this.file.size);
+              xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
+              if (xhr.upload) {
+                xhr.upload.addEventListener('progress', this.onProgress);
+              }
+              xhr.onload = this.onContentUploadSuccess_.bind(this);
+              xhr.onerror = this.onContentUploadError_.bind(this);
+              xhr.send();
+            };
+
+            MediaUploader.prototype.extractRange_ = function(xhr) {
+              var range = xhr.getResponseHeader('Range');
+              if (range) {
+                this.offset = parseInt(range.match(/\d+/g).pop(), 10) + 1;
+              }
+            };
+
+            MediaUploader.prototype.onContentUploadSuccess_ = function(e) {
+              if (e.target.status == 200 || e.target.status == 201) {
+                this.onComplete(e.target.response);
+              } else if (e.target.status == 308) {
+                this.extractRange_(e.target);
+                this.retryHandler.reset();
+                this.sendFile_();
+              }
+            };
+
+            MediaUploader.prototype.onContentUploadError_ = function(e) {
+              if (e.target.status && e.target.status < 500) {
+                this.onError(e.target.response);
+              } else {
+                this.retryHandler.retry(this.resume_.bind(this));
+              }
+            };
+
+            MediaUploader.prototype.onUploadError_ = function(e) {
+              this.onError(e.target.response); // TODO - Retries for initial upload
+            };
+
+            MediaUploader.prototype.buildQuery_ = function(params) {
+              params = params || {};
+              return Object.keys(params).map(function(key) {
+                return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+              }).join('&');
+            };
+
+            MediaUploader.prototype.buildUrl_ = function(id, params, baseUrl) {
+              var url = baseUrl || DRIVE_UPLOAD_URL;
+              if (id) {
+                url += id;
+              }
+              var query = this.buildQuery_(params);
+              if (query) {
+                url += '?' + query;
+              }
+              return url;
+            };
+        </script>
+
+        <script>
+            var chkFixSeeking = document.querySelector('#chk-fixSeeking');
+            chkFixSeeking.onchange = function() {
+                if(this.checked === true) {
+                    localStorage.setItem(this.id, 'true');
+                }
+                else {
+                    localStorage.removeItem(this.id);
+                }
+            };
+            if(localStorage.getItem(chkFixSeeking.id) === 'true') {
+                chkFixSeeking.checked = true;
+            }
+        </script>
+
+        <script>
+            var chkTimeSlice = document.querySelector('#chk-timeSlice');
+            var timeSlice = false;
+
+            if(typeof MediaRecorder === 'undefined') {
+                chkTimeSlice.disabled = true;
+            }
+
+            chkTimeSlice.addEventListener('change', function() {
+                if(chkTimeSlice.checked === true) {
+                    var _timeSlice = prompt('Please enter timeSlice in milliseconds e.g. 1000 or 2000 or 3000.', 1000);
+                    _timeSlice = parseInt(_timeSlice);
+                    if(!_timeSlice || _timeSlice == NaN || typeof _timeSlice === 'undefined') {
+                        timeSlice = false;
+                        return;
+                    }
+
+                    timeSlice = _timeSlice;
+                }
+                else {
+                    timeSlice = false;
+                }
+            }, false);
+        </script>
+
+        <script>
+            var btnPauseRecording = document.querySelector('#btn-pause-recording');
+            btnPauseRecording.onclick = function() {
+                if(!btnStartRecording.recordRTC) {
+                    btnPauseRecording.style.display = 'none';
+                    return;
+                }
+
+                btnPauseRecording.disabled = true;
+                if(btnPauseRecording.innerHTML === 'Pause') {
+                    btnStartRecording.disabled = true;
+                    chkFixSeeking.parentNode.style.display = 'none';
+                    btnStartRecording.style.fontSize = '15px';
+                    btnStartRecording.recordRTC.pauseRecording();
+                    recordingPlayer.parentNode.parentNode.querySelector('h2').innerHTML = 'Recording status: paused';
+                    recordingPlayer.pause();
+
+                    btnPauseRecording.style.fontSize = 'inherit';
+                    setTimeout(function() {
+                        btnPauseRecording.innerHTML = 'Resume Recording';
+                        btnPauseRecording.disabled = false;
+                    }, 2000);
+                }
+
+                if(btnPauseRecording.innerHTML === 'Resume Recording') {
+                    btnStartRecording.disabled = false;
+                    chkFixSeeking.parentNode.style.display = 'none';
+                    btnStartRecording.style.fontSize = 'inherit';
+                    btnStartRecording.recordRTC.resumeRecording();
+                    recordingPlayer.parentNode.parentNode.querySelector('h2').innerHTML = '<img src="https://www.webrtc-experiment.com/images/progress.gif">';
+                    recordingPlayer.play();
+
+                    btnPauseRecording.style.fontSize = '15px';
+                    btnPauseRecording.innerHTML = 'Pause';
+                    setTimeout(function() {
+                        btnPauseRecording.disabled = false;
+                    }, 2000);
+                }
+            };
+        </script>
+    </article>
+
+    <footer>
+    </footer>
+</body></html>
